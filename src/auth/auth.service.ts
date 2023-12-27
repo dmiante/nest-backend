@@ -76,8 +76,15 @@ export class AuthService {
     }
   }
 
-  findAll() {
-    return `This action returns all auth`
+  findAll(): Promise<User[]> {
+    return this.userModel.find()
+  }
+
+  async findUserById(id: string) {
+    const user = await this.userModel.findById(id)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...rest } = user.toJSON()
+    return rest
   }
 
   findOne(id: number) {
