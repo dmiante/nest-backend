@@ -47,9 +47,11 @@ export class AuthService {
   }
 
   async register(registerDto: RegisterDto): Promise<LoginResponse> {
+    const user = await this.create(registerDto)
+    console.log({ user })
     return {
       user: user,
-      token: 'asdasf'
+      token: this.getJwtToken({ id: user._id })
     }
   }
 
